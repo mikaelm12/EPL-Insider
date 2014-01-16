@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".LeagueTable_Activity$PlaceholderFragment">
+<LinearLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="horizontal">
+
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_weight="70"
+        android:text="Rank"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_weight="30"
+        android:text="  Club"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+
+
+    </LinearLayout>
+    <ListView
+        android:layout_marginTop="25dp"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id = "@+id/lvTeams">
+
+        </ListView>
+
+</RelativeLayout>
