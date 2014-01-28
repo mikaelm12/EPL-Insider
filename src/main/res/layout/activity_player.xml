@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:id="@+id/tvPlayerName"
+        android:paddingBottom="15dp"
+        android:gravity="center"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+   <TableLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+    <TableRow>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Age :"
+        android:paddingLeft="30dp"
+        android:layout_weight=".5"
+        android:paddingTop="15dp"
+        android:textSize="20dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvPlayerAge"
+        android:layout_weight=".5"
+        android:paddingTop="15dp"
+        android:textSize="20dp"/>
+
+
+    </TableRow>
+
+       <TableRow>
+
+           <TextView
+               android:paddingTop="15dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Height : "
+               android:paddingLeft="30dp"
+               android:layout_weight=".5"
+               android:textSize="20dp"/>
+           <TextView
+               android:paddingTop="15dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/tvHeight"
+               android:layout_weight=".5"
+               android:textSize="20dp"/>
+
+
+       </TableRow>
+       <TableRow>
+
+           <TextView
+               android:paddingTop="15dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Weight :"
+               android:paddingLeft="30dp"
+               android:layout_weight=".5"
+               android:textSize="20dp"
+               />
+           <TextView
+               android:paddingTop="15dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/tvWeight"
+               android:layout_weight=".5"
+               android:textSize="20dp"/>
+
+
+       </TableRow>
+
+
+       <TableRow>
+
+           <TextView
+               android:paddingTop="15dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Appearances :"
+               android:paddingLeft="30dp"
+               android:layout_weight=".5"
+               android:textSize="20dp"/>
+           <TextView
+               android:paddingTop="15dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/tvApperances"
+               android:layout_weight=".5"
+               android:textSize="20dp"/>
+
+
+       </TableRow>
+       <TableRow>
+
+           <TextView
+               android:paddingTop="15dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Goals :"
+               android:paddingLeft="30dp"
+               android:layout_weight=".5"
+               android:textSize="20dp"/>
+           <TextView
+               android:paddingTop="15dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/tvGoals"
+               android:layout_weight=".5"
+               android:textSize="20dp"/>
+
+
+       </TableRow>
+       <TableRow>
+
+           <TextView
+               android:paddingTop="15dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Position :"
+               android:paddingLeft="30dp"
+               android:layout_weight=".5"
+               android:textSize="20dp"/>
+           <TextView
+               android:paddingTop="15dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/tvPosition"
+               android:layout_weight=".5"
+               android:textSize="20dp"/>
+
+
+       </TableRow>
+
+       <TableRow>
+
+           <TextView
+               android:paddingTop="15dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Home Country :"
+               android:paddingLeft="30dp"
+               android:layout_weight=".5"
+               android:textSize="20dp"/>
+           <TextView
+               android:paddingTop="5dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/tvHomeCountry"
+               android:layout_weight=".5"
+               android:textSize="20dp"/>
+
+
+       </TableRow>
+       <TableRow>
+
+           <TextView
+               android:paddingTop="15dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Yellow Cards :"
+               android:paddingLeft="30dp"
+               android:layout_weight=".5"
+               android:textSize="20dp"/>
+           <TextView
+               android:paddingTop="15dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/tvYellow"
+               android:layout_weight=".5"
+               android:textSize="20dp"/>
+
+
+       </TableRow>
+       <TableRow>
+
+           <TextView
+               android:paddingTop="15dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Red Cards :"
+               android:paddingLeft="30dp"
+               android:layout_weight=".5"
+               android:textSize="20dp"/>
+           <TextView
+               android:paddingTop="15dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/tvRed"
+               android:layout_weight=".5"
+               android:textSize="20dp"/>
+
+
+       </TableRow>
+
+
+
+   </TableLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -125,7 +125,7 @@ public class
 
                 int firstIndex = result.indexOf("<td class=\"col-club\"><a href=\"/en-gb/clubs/club-profile.html");
                 int secondIndex = result.lastIndexOf("</a></td>");
-                StringBuilder teams = new StringBuilder();
+
 
                 Log.d("Index", "Index 1: "+ firstIndex+ "Index 2:  " +secondIndex);
 
@@ -187,72 +187,76 @@ public class
             }
 
             for(int i =0; i<splitter.length; i++){
+
+                String pts = getPts(splitter[i]);
+
                 if (splitter[i].contains("Arsenal")){
-                    EPLTeams.add(new Team("Arsenal",i));
+                    EPLTeams.add(new Team("Arsenal",i,pts));
 
                 }
                 else if (splitter[i].contains("Chelsea")){
-                    EPLTeams.add(new Team("Chelsea",i));
+                    EPLTeams.add(new Team("Chelsea",i,pts));
 
                 }
                 else if (splitter[i].contains("Man City")){
-                    EPLTeams.add(new Team("Man City",i));
+                    EPLTeams.add(new Team("Man-City",i, pts));
 
                 }
                 else if (splitter[i].contains("Sunderland")){
-                    EPLTeams.add(new Team("Sunderland",i));
+                    EPLTeams.add(new Team("Sunderland",i, pts));
 
                 }
                 else if (splitter[i].contains("West Ham")){
-                    EPLTeams.add(new Team("West Ham",i));
+                    EPLTeams.add(new Team("West-Ham",i, pts));
 
                 }
                 else if (splitter[i].contains("Crystal Palace")){
-                    EPLTeams.add(new Team("Crystal Palace",i));
+                    EPLTeams.add(new Team("Crystal-Palace",i, pts));
                 }
                 else if (splitter[i].contains("Cardiff")){
-                    EPLTeams.add(new Team("Cardiff",i));
+                    EPLTeams.add(new Team("Cardiff",i, pts));
                 }
                 else if (splitter[i].contains("Fulham")){
-                    EPLTeams.add(new Team("Fulham",i));
+                    EPLTeams.add(new Team("Fulham",i, pts));
                 }
                 else if (splitter[i].contains("Norwich")){
-                    EPLTeams.add(new Team("Norwich",i));
+                    EPLTeams.add(new Team("Norwich",i, pts));
                 }
                 else if (splitter[i].contains("West Brom")){
-                    EPLTeams.add(new Team("West Brom",i));
+                    EPLTeams.add(new Team("West-Brom",i, pts));
                 }
                 else if (splitter[i].contains("Swansea")){
-                    EPLTeams.add(new Team("Swansea",i));
+                    EPLTeams.add(new Team("Swansea",i, pts));
                 }
                 else if (splitter[i].contains("Stoke")){
-                    EPLTeams.add(new Team("Stoke",i));
+                    EPLTeams.add(new Team("Stoke",i, pts));
                 }
                 else if (splitter[i].contains("Aston Villa")){
-                    EPLTeams.add(new Team("Aston Villa",i));
+                    EPLTeams.add(new Team("Aston-Villa",i, pts));
                 }
                 else if (splitter[i].contains("Hull")){
-                    EPLTeams.add(new Team("Hull",i));
+                    EPLTeams.add(new Team("Hull",i, pts));
                 }
                 else if (splitter[i].contains("Southampton")){
-                    EPLTeams.add(new Team("Southampton",i));
+                    EPLTeams.add(new Team("Southampton",i, pts));
 
                 }
                 else if (splitter[i].contains("Newcastle")){
-                    EPLTeams.add(new Team("Newcastle",i));
+                    EPLTeams.add(new Team("Newcastle",i, pts));
                 }
                 else if (splitter[i].contains("Man Utd")){
-                    EPLTeams.add(new Team("Man Utd",i));
+                    EPLTeams.add(new Team("Man-Utd",i, pts));
                 }
                 else if (splitter[i].contains("Spurs")){
-                    EPLTeams.add(new Team("Spurs",i));
+                    EPLTeams.add(new Team("Spurs",i, pts));
                 }
                 else if (splitter[i].contains("Everton")){
-                    EPLTeams.add(new Team("Everton",i));
+                    EPLTeams.add(new Team("Everton",i, pts));
                 }
                 else if (splitter[i].contains("Liverpool")){
-                    EPLTeams.add(new Team("Liverpool",i));
+                    EPLTeams.add(new Team("Liverpool",i, pts));
                 }
+
 
 
 
@@ -260,9 +264,36 @@ public class
 
 
 
-            String teamsOutput = finalTeams.toString();
+
             return EPLTeams;
         }
+
+        private String getPts(String teamBlock){
+            int thirdIndex = teamBlock.lastIndexOf("td class=\"col-pts\"");
+            int fourthIndex = teamBlock.lastIndexOf("</td>");
+            String  pts = teamBlock.substring(thirdIndex+ 19, fourthIndex);
+
+            return pts;
+        }
+
+       /* private String getAge(String teamBlock){
+
+        }
+
+        private String getNationality(String teamBlock){
+
+        }
+
+        private String getGoals(String teamBLock){
+
+        }
+
+        private String getPosition(String teamBlock){
+
+        }
+
+        */
+
 
     @Override
         protected void onPostExecute(ArrayList<Team> EPLTeams){
@@ -273,17 +304,47 @@ public class
 
 
         // Fill the songs array by using a for loop
-        
 
 
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(LeagueTable_Activity.this, android.R.layout.simple_list_item_1, EPLTeams);
-        TeamList.setAdapter(arrayAdapter);
+
+       // ArrayAdapter arrayAdapter = new ArrayAdapter(LeagueTable_Activity.this, android.R.layout.simple_list_item_1, EPLTeams);
+     //   TeamList.setAdapter(arrayAdapter);
+
+        TeamAdapter adapter = new TeamAdapter(EPLTeams);
+        TeamList.setAdapter(adapter);
 
                 //setupAdapter();
 
             }
 
+    }
+
+    private class TeamAdapter extends ArrayAdapter<Team>{
+
+        TextView tvClub;
+
+        public TeamAdapter(ArrayList<Team> teams){
+            super(LeagueTable_Activity.this, 0, teams);
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent ){
+            if (convertView== null){
+                convertView = LeagueTable_Activity.this.getLayoutInflater().inflate(R.layout.list_item_team,null);
+            }
+
+            Team team = getItem(position);
+            tvClub = (TextView) convertView.findViewById(R.id.tvClub);
+            tvClub.setText(team.getmClubName());
+
+            TextView tvRank = (TextView) convertView.findViewById(R.id.tvRank);
+            tvRank.setText(String.valueOf(team.getmRank()));
+
+            TextView tvPoints = (TextView)convertView.findViewById(R.id.tvPoints);
+            tvPoints.setText(team.getmPoints());
+
+            return convertView;
+        }
     }
 
 }

@@ -30,7 +30,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.manedevelopers.eplinsider.SquadList"
+        android:name="com.manedevelopers.eplinsider.SquadList"
+        android:label="@string/app_name"
+        android:screenOrientation="portrait">
+
+    </activity>
+        <activity
+            android:name="com.manedevelopers.eplinsider.PlayerActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
 

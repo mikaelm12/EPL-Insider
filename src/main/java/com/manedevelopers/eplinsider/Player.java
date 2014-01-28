@@ -13,6 +13,17 @@ public class Player {
   private double mHeight;
   private int mGoalsScored;
   private int mEPLApps;
+  private String number;
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+
 
 
     public Player(String name){
@@ -23,6 +34,11 @@ public class Player {
 
     public String getName() {
         return mName;
+    }
+
+    @Override
+    public String toString(){
+        return "      "+number+ "                  " + mName;
     }
 
     public void setName(String mName) {

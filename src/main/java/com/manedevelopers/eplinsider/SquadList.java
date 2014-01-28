@@ -1,11 +1,15 @@
 package com.manedevelopers.eplinsider;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -18,6 +22,8 @@ public class SquadList extends Activity {
     public static final String TAG = "LeagueTable";
     TextView clubname;
     TextView html_res;
+    ArrayList<Player> mPLayers;
+    private ListView PlayerList;
     public static String club;
     private String CLUB_NAME = "club_name";
 
@@ -27,7 +33,7 @@ public class SquadList extends Activity {
         setContentView(R.layout.activity_squadlist);
 
 
-
+        PlayerList = (ListView)findViewById(R.id.lvPLayers);
 
         club = getIntent().getStringExtra(CLUB_NAME);
 
@@ -37,24 +43,38 @@ public class SquadList extends Activity {
 
         new FetchItemsTask().execute();
 
+        PlayerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView <?> parent, View view, int position,
+                                    long id) {
+                Intent intent = new Intent(SquadList.this, PlayerActivity.class);
+                Player selected_player = mPLayers.get(position);
+                intent.putExtra("Player",selected_player.getName());
+
+
+
+                startActivity(intent);
+            }
+        });
+
+
 
 
 
     }
-    private class FetchItemsTask extends AsyncTask<Void,Void,String> {
+    private class FetchItemsTask extends AsyncTask<Void,Void,ArrayList<Player>> {
         @Override
-        protected String doInBackground(Void...params){
+        protected ArrayList<Player> doInBackground(Void...params){
             try{
-                String result = new getLeagueTable().getURL("http://m.premierleague.com/en-gb/players/playersbyclubresults.html/"+ club.toLowerCase());
-                Log.i(TAG, "Please work" + result);
 
 
+                String result = new getLeagueTable().getURL("http://m.premierleague.com/en-gb/players/playersbyclubresults.html/" + club.toLowerCase());
+                if (club.split(" ").length> 1){
+                    result = new getLeagueTable().getURL("http://m.premierleague.com/en-gb/players/playersbyclubresults.html/" + club.split(" ")[0]+ "-"+ club.split(" ")[1]);
 
-                int firstIndex = result.indexOf("<td class=\"col-club\"><a href=\"/en-gb/clubs/club-profile.html");
-                int secondIndex = result.lastIndexOf("</a></td>");
-                StringBuilder teams = new StringBuilder();
+                }
 
-                Log.d("Index", "Index 1: "+ firstIndex+ "Index 2:  " +secondIndex);
+                ArrayList<Player> squadList = players(result);
 
 
 
@@ -63,7 +83,7 @@ public class SquadList extends Activity {
 
 
                 //String leagueTable = teams(result);
-                return result;
+                return squadList;
             }catch (IOException ioe){
                 Log.e(TAG,"Failed to fetch URL:", ioe);
             }
@@ -71,24 +91,91 @@ public class SquadList extends Activity {
             return null;
         }
 
-        private String players(String html){
-            /* TODO Write team list parser*/
+        /**
+         * Returns an Array list of all the players on the selected Team
+         * @param html
+         * @return
+         */
 
-            return "Hi there";
 
+        private ArrayList<Player> players(String html){
+
+
+            ArrayList<Player> teamMates = new ArrayList<Player>();
+
+            String[] textArray = html.split("");
+
+
+            // Setting the flags for each individual teams
+
+            int firstIndex = html.indexOf("<div class=\"players-by-clubs\">");
+            int secondIndex = html.lastIndexOf("</a></div></div></td");
+            StringBuilder playerlist = new StringBuilder();
+
+
+            //Checking the flags
+
+
+
+            for (int i = firstIndex; i <= secondIndex; i++){
+                playerlist.append(textArray[i]);
+
+            }
+
+
+
+            String splitPlayers[] =  playerlist.toString().split("<tr class=\"alt\">");
+
+            
+
+            // String split2Players[] = splitPlayers[0].split()
+
+            // int thirdIndex = splitPlayers[5].lastIndexOf("\">");
+            // int fourthIndex = splitPlayers[5].indexOf("</a></div");
+            //System.out.println(splitPlayers[5].substring(thirdIndex+2,fourthIndex));
+
+
+            for (int i = 0; i<= splitPlayers.length -2; i++){
+
+                int thirdIndex = splitPlayers[i].lastIndexOf("\">");
+                int fourthIndex = splitPlayers[i].indexOf("</a></div");
+                String  player = splitPlayers[i].substring(thirdIndex+2,fourthIndex);
+                Player person = new Player(player);
+                
+                String num = getNumber(splitPlayers[i]);
+                person.setNumber(num);
+
+                teamMates.add(person);
+            }
+
+        return teamMates;
         }
 
+        private String getNumber(String playerBlock){
+
+
+
+                int thirdIndex = playerBlock.indexOf("squadNo\">");
+                int fourthIndex = playerBlock.indexOf(".&");
+                String  number = playerBlock.substring(thirdIndex+ 9, fourthIndex);
+                System.out.println(number);
+                 return number;
+
+            }
+
+
+
+
+
+
         @Override
-        protected void onPostExecute(String players){
+        protected void onPostExecute(ArrayList<Player> Players){
+            mPLayers = Players;
 
 
 
-            html_res = (TextView)findViewById(R.id.html);
-
-            html_res.setText(players);
-
-
-
+            ArrayAdapter arrayAdapter2 = new ArrayAdapter(SquadList.this, android.R.layout.simple_list_item_1, Players);
+            PlayerList.setAdapter(arrayAdapter2);
 
 
             //setupAdapter();

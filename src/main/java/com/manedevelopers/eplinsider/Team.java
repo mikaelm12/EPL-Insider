@@ -10,21 +10,45 @@ public class Team {
     private String mClubName;
     private ArrayList<String> mSquad;
     private String mManager;
-    private int mRank;
 
 
-    public Team(String club, int rank){
+
+    public Team(String club, int rank, String pts){
         mClubName = club;
         mRank = rank+1;
+        mPoints= pts;
 
 
 
     }
 
 
+    public int getmRank() {
+        return mRank;
+    }
+
+    public void setmRank(int mRank) {
+        this.mRank = mRank;
+    }
+
+    private int mRank;
+
+    public String getmPoints() {
+        return mPoints;
+    }
+
+    public void setmPoints(String mPoints) {
+        this.mPoints = mPoints;
+    }
+
+    private String mPoints;
+
+
+
+
     @Override
     public String toString(){
-        return ""+mRank+ "                    "+ mClubName;
+        return ""+mRank+ "                    "+ mClubName + "              "+ mPoints;
     }
     public String getmClubName() {
         return mClubName;
