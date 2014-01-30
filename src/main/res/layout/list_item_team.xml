@@ -8,6 +8,7 @@
 
 
     <TextView
+        android:paddingLeft="17dp"
         android:paddingBottom="12dp"
         android:paddingTop="12dp"
         android:layout_width="match_parent"

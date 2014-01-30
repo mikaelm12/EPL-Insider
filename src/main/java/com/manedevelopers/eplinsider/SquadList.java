@@ -195,14 +195,14 @@ public class SquadList extends Activity {
             @Override
             public View getView(int position, View convertView, ViewGroup parent ){
                 if (convertView== null){
-                    convertView = SquadList.this.getLayoutInflater().inflate(R.layout.list_item_team,null);
+                    convertView = SquadList.this.getLayoutInflater().inflate(R.layout.list_item_player,null);
                 }
 
                 Player player = getItem(position);
-                tvPlayerNumber = (TextView) convertView.findViewById(R.id.tvSquadNumber);
-                tvPlayerNumber.setText(player.getName());
+                TextView tvPlayerNumber = (TextView) convertView.findViewById(R.id.tvSquadNumber);
+                tvPlayerNumber.setText(player.getNumber());
 
-                tvPlayerName = (TextView) convertView.findViewById(R.id.tvPlayerName);
+                TextView tvPlayerName = (TextView) convertView.findViewById(R.id.tvPlayerName);
                 tvPlayerName.setText(player.getName());
 
 
