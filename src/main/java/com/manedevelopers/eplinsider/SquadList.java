@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -174,13 +175,40 @@ public class SquadList extends Activity {
 
 
 
-            ArrayAdapter arrayAdapter2 = new ArrayAdapter(SquadList.this, android.R.layout.simple_list_item_1, Players);
-            PlayerList.setAdapter(arrayAdapter2);
+            PlayerAdapter adapter = new PlayerAdapter(Players);
+            PlayerList.setAdapter(adapter);
 
 
-            //setupAdapter();
+
 
         }
 
+
+        private class PlayerAdapter extends ArrayAdapter<Player>{
+
+            TextView tvPlayerNumber;
+            TextView  tvPlayerName;
+
+            public PlayerAdapter(ArrayList<Player> players){
+                super(SquadList.this, 0, players);
+            }
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent ){
+                if (convertView== null){
+                    convertView = SquadList.this.getLayoutInflater().inflate(R.layout.list_item_player,null);
+                }
+
+                Player player = getItem(position);
+                TextView tvPlayerNumber = (TextView) convertView.findViewById(R.id.tvSquadNumber);
+                tvPlayerNumber.setText(player.getNumber());
+
+                TextView tvPlayerName = (TextView) convertView.findViewById(R.id.tvPlayerName);
+                tvPlayerName.setText(player.getName());
+
+
+
+                return convertView;
+            }
+        }
     }
 }
