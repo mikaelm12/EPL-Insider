@@ -49,8 +49,8 @@ public class PlayerActivity extends Activity {
         int thirdIndex = playerHtml.lastIndexOf("Total</td");
         int fourthIndex = playerHtml.lastIndexOf("/tbody");
 
-        String  stats = playerHtml.substring(thirdIndex+1, fourthIndex);
-        splitStats[0] = stats.split("</td>")[0].substring(4);
+//        String  stats = playerHtml.substring(thirdIndex+1, fourthIndex);
+      //  splitStats[0] = stats.split("</td>")[0].substring(4);
 
         // 0 - Appearance  1- goals 2- Yellow Cards 3- Reds
         return splitStats;

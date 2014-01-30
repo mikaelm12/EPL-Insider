@@ -175,7 +175,7 @@ public class SquadList extends Activity {
 
 
 
-            PlayerAdapter adapter = new PlayerAdapter(Players);
+            PlayerAdapter adapter = new PlayerAdapter(mPLayers);
             PlayerList.setAdapter(adapter);
 
 
@@ -186,8 +186,7 @@ public class SquadList extends Activity {
 
         private class PlayerAdapter extends ArrayAdapter<Player>{
 
-            TextView tvPlayerNumber;
-            TextView  tvPlayerName;
+
 
             public PlayerAdapter(ArrayList<Player> players){
                 super(SquadList.this, 0, players);
